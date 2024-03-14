@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Recipe Finder</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Light grey background color */
+}
+
+.header {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: bold;
+    color: #2F4858; /* Darker green color */
+}
+
+.form_recipe {
+    background-color: #ffffff; /* White background color */
+    width: 500px;
+    padding: 50px;
+    margin: 0 auto;
+    border-radius: 15px;
+    margin-top: 50px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+/* Style for the ingredient input field */
+#ingredient {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Style for the submit button */
+.btn-primary {
+    background-color: #18AC84; /* Light green button color */
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #00938A; /* Darker green button hover color */
+}
+
+/* Style for the recipe list */
+#recipelist {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 50px;
+}
+
+/* Style for recipe list items */
+.recipe-item {
+    background-color: #ffffff; /* White background color */
+    border: 1px solid #dee2e6; /* Bootstrap's default border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px;
+    margin-bottom: 20px; /* Add space between recipe items */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+/* Style for icons */
+.icon {
+    width: 25px;
+    margin-right: 10px;
+}
+
+
+/* Modern heading style */
+h3 {
+    font-weight: bold;
+    color: #2F4858; /* Darker green color */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+#buttons {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#buttons button.btn-primary {
+    background-color: #ffffff; /* White button color */
+    border: 1px solid #e4e4e4; /* Light grey button border color */
+    color: #595959; /* Darker green text color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#buttons button.btn-primary:hover {
+    background-color: #f4f3f3; /* Light grey button hover color */
+}
+
+
+    </style>
+</head>
+<body>
+    <h1 class="header">Recipe Finder</h1>
+    <section id="form_section">
+        <div class="form_recipe">
+            <form id="ingredientform">
+                <div class="mb-3">
+                    <label for="ingredient" class="form-label">Enter ingredient name</label>
+                    <input type="text" class="form-control" id="ingredient">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="Ingredient()"><i class="fas fa-search"></i>Find</button>
+            </form>
+        </div>
+    </section>
+    <section id="recipe_section">
+        <button type="button" class="btn btn-primary" onclick="Goback()" style="float: right;margin-right: 50px;">Go Back</button>
+        <div class="container" style="display: flex; align-items: center;">
+            <div style="flex: 1;" id="image_tomato">
+                <img src="Spicy_Tomato_Basil_Pasta_Vegan_FromMyBowl-12.jpg" alt="spicy_tomato_basil_recipe" style="width: 400px;border-radius: 15px;">
+            </div>
+            <div style="flex: 1;" id="image_potato">
+                <img src="poatato.jpeg" alt="spicy_tomato_basil_recipe" style="width: 400px;border-radius: 15px;">
+            </div>
+            <div style="flex: 1;" id="image_onion">
+                <img src="onion.webp" alt="spicy_tomato_basil_recipe" style="width: 400px;border-radius: 15px;">
+            </div>
+            <div style="flex: 1;" id="image_book">
+                <img src="Recipe book-pana (1).png" alt="spicy_tomato_basil_recipe" style="width: 300px;border-radius: 15px;margin-left: 100px; ">
+            </div>
+            <div style="flex: 1;" id="image_egg">
+                <img src="scrambled-eggs.webp" alt="spicy_tomato_basil_recipe" style="width: 300px;border-radius: 15px;margin-left: 100px; ">
+            </div>
+            <div style="flex: 1;" id="image_chicken">
+                <img src="herb-chic.jpg" alt="spicy_tomato_basil_recipe" style="width: 300px;border-radius: 15px;margin-left: 100px; ">
+            </div>
+            <div style="flex: 1;" id="image_carrot">
+                <img src="Tahini-and-Cumin-Roasted-Carrots.jpg" alt="spicy_tomato_basil_recipe" style="width: 300px;border-radius: 15px;margin-left: 100px; ">
+            </div>
+            <div style="flex: 1;">
+                <div>
+                    <h3 id="recipeheader" style="margin-top: 50px;"></h3>
+                </div>
+                <div>
+                    <ul id="recipelist"></ul>
+                </div>
+            </div>       
+        </div>
+    </section>
+    <section id="buttons">
+        <div>
+            <button type="button" class="btn btn-primary mr-3" onclick="Tomato()"><img src="tomato.png" alt="Tomato" class="icon" >Tomato</button>
+            <button type="button" class="btn btn-primary mr-3"onclick="Onion()"><img src="onion.png" alt="Onion" class="icon">Onions</button>
+            <button type="button" class="btn btn-primary mr-3"onclick="Potato()"><img src="potato.png" alt="Potato" class="icon">Potato</button>
+            <button type="button" class="btn btn-primary mr-3"onclick="Egg()"><img src="egg.png" alt="Egg" class="icon">Egg</button>
+            <button type="button" class="btn btn-primary mr-3"onclick="Chicken()"><img src="fried-chicken.png" alt="Chicken" class="icon">Chicken</button>
+            <button type="button" class="btn btn-primary mr-3"onclick="Carrot()"><img src="carrot.png" alt="Carrot" class="icon">Carrot</button>
+        </div>
+    </section>
+    <script src="index.js"></script>
+</body>
+</html>
